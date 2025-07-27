@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Node modules (both frontend and backend)
+Varta/node_modules/
+server/node_modules/
+
+# Expo and React Native
+Varta/.expo/
+Varta/.expo-shared/
+Varta/.cache/
+Varta/android/
+Varta/ios/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+Varta/dist/
+server/dist/
+server/build/
+
+# Environment variables
+*.env
+Varta/.env
+server/.env
+
+# TypeScript
+*.tsbuildinfo
