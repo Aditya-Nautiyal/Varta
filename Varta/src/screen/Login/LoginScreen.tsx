@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import CustomButton from "../../component/CustomButton";
 import SpaceFiller from "../../component/SpaceFiller";
 import { RootStackParamList } from "../../../App";
 
@@ -22,6 +23,12 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const handlePasswordChange = (text: string) => {
     setPassword(text);
   };
+  const handleLoginPress = () => {
+    // Handle login logic here
+    console.log("Login pressed with email:", email, "and password:", password);
+    // Navigate to another screen if needed
+    // navigation.navigate('SomeOtherScreen');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.loginSignUpContainer}>
@@ -30,7 +37,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.inputTextContainer}>
           <Text style={styles.inputTextTitle}>Email</Text>
           <SpaceFiller margin={4} />
-          <TextInput style={styles.inputText} onChangeText={handleEmailChange} placeholder="Ex: abc@gmail.com"/>
+          <TextInput
+            style={styles.inputText}
+            onChangeText={handleEmailChange}
+            placeholder="Ex: abc@gmail.com"
+          />
         </View>
         <SpaceFiller />
 
@@ -44,6 +55,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             placeholder="Ex: Login@12345"
           />
         </View>
+        <SpaceFiller />
+
+        <CustomButton title="Login" onPress={handleLoginPress} />
       </View>
     </View>
   );
@@ -84,7 +98,7 @@ const styles = StyleSheet.create({
   },
   inputTextTitle: {
     color: "black",
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "bold",
     fontFamily: "monospace",
   },
