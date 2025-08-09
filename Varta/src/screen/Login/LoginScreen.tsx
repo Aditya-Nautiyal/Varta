@@ -4,7 +4,10 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import CustomButton from "../../component/CustomButton";
@@ -17,49 +20,53 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (text: string) => {
-    setEmail(text);
-  };
-  const handlePasswordChange = (text: string) => {
-    setPassword(text);
-  };
   const handleLoginPress = () => {
-    // Handle login logic here
     console.log("Login pressed with email:", email, "and password:", password);
-    // Navigate to another screen if needed
-    // navigation.navigate('SomeOtherScreen');
+    navigation.navigate("Home");
   };
-  return (
-    <View style={styles.container}>
-      <View style={styles.loginSignUpContainer}>
-        <Text style={styles.title}>Login</Text>
-        <SpaceFiller margin={24}/>
-        <View style={styles.inputTextContainer}>
-          <Text style={styles.inputTextTitle}>Email</Text>
-          <SpaceFiller margin={4} />
-          <TextInput
-            style={styles.inputText}
-            onChangeText={handleEmailChange}
-            placeholder="Ex: abc@gmail.com"
-          />
-        </View>
-        <SpaceFiller />
 
-        <View style={styles.inputTextContainer}>
-          <Text style={styles.inputTextTitle}>Password</Text>
-          <SpaceFiller margin={4} />
-          <TextInput
-            secureTextEntry
-            style={styles.inputText}
-            onChangeText={handlePasswordChange}
-            placeholder="Ex: Login@12345"
-          />
-        </View>
-        <SpaceFiller margin={24}/>
-    
-        <CustomButton title="Login" onPress={handleLoginPress} />
-      </View>
-    </View>
+  return (
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.topSection} />
+          <View style={styles.loginSignUpContainer}>
+            <Text style={styles.title}>Login</Text>
+            <SpaceFiller margin={24} />
+            <View style={styles.inputTextContainer}>
+              <Text style={styles.inputTextTitle}>Email</Text>
+              <SpaceFiller margin={4} />
+              <TextInput
+                style={styles.inputText}
+                onChangeText={setEmail}
+                placeholder="Ex: abc@gmail.com"
+              />
+            </View>
+            <SpaceFiller />
+
+            <View style={styles.inputTextContainer}>
+              <Text style={styles.inputTextTitle}>Password</Text>
+              <SpaceFiller margin={4} />
+              <TextInput
+                secureTextEntry
+                style={styles.inputText}
+                onChangeText={setPassword}
+                placeholder="Ex: Login@12345"
+              />
+            </View>
+            <SpaceFiller margin={24} />
+
+            <CustomButton title="Login" onPress={handleLoginPress} />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -68,17 +75,16 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
     backgroundColor: "black",
   },
+  topSection: {
+    flex: 0.4, // black top part stays same height
+  },
   loginSignUpContainer: {
-    flex: 0.7,
-    width: "100%",
+    flex: 0.6, // white card takes rest of screen
     backgroundColor: "#f0f0f0",
     paddingHorizontal: 20,
     paddingVertical: 20,
-    // Top corners only
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     justifyContent: "flex-start",
