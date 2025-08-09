@@ -33,7 +33,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.loginSignUpContainer}>
         <Text style={styles.title}>Login</Text>
-        <SpaceFiller />
+        <SpaceFiller margin={24}/>
         <View style={styles.inputTextContainer}>
           <Text style={styles.inputTextTitle}>Email</Text>
           <SpaceFiller margin={4} />
@@ -55,8 +55,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             placeholder="Ex: Login@12345"
           />
         </View>
-        <SpaceFiller />
-
+        <SpaceFiller margin={24}/>
+    
         <CustomButton title="Login" onPress={handleLoginPress} />
       </View>
     </View>
